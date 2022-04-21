@@ -1,0 +1,33 @@
+
+-------------------------------------------------------------------
+Data e hora: 20/04/2022 19:17
+
+Assentos vendidos: 
+Assentos disponíveis: A1, A3, A4, B1, B2, B3, B4, D1, D2, D4, E1, E2, E3, E4
+
+-------------------------------------------------------------------
+Data e hora: 20/04/2022 19:17
+
+Assentos vendidos: 
+Assentos disponíveis: A1, A3, A4, B1, B2, B3, B4, D1, D2, D4, E1, E2, E3, E4
+
+===================================================================
+Layout da posição dos assentos
+
+LEGENDA
+ 	M: Assento do motorista
+	▒: Assentos disponíveis para compra
+	▓: Assentos disponíveis para compra
+	X: Assentos indisponíveis para compra
+
+		A	B	C	D	E
+	0	M	▒	▒	▒	▒	
+
+	1	▓	▓	▒	▓	▓	
+
+	2	X	▓	▒	▓	▓	
+
+	3	▓	▓	▒	X	▓	
+
+	4	▓	▓	▒	▓	▓	
+
