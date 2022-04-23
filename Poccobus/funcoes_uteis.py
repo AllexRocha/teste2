@@ -7,7 +7,7 @@ import datetime
 def escrever_txt(vendidos, assentos, lista_cancel):
     assentos_disp = []
     string = ''
-    for i in range(ord('A'), ord('A') + assentos.shape[1] - 1):
+    for i in range(ord('A'), ord('A') + assentos.shape[1]):
         for j in range(1, assentos.shape[0]):
             if assentos.at[j, chr(i)] == '▓':
                 assentos_disp.append(chr(i) + str(j))
@@ -51,7 +51,7 @@ def escrever_txt(vendidos, assentos, lista_cancel):
 
         for i in range(0, assentos.shape[0]):
             arquivo.write('\t' + str(i) + '\t')
-            for j in range(ord('A'), ord('A') + assentos.shape[1] -1):
+            for j in range(ord('A'), ord('A') + assentos.shape[1]):
                 arquivo.write(assentos.at[i, chr(j)] + '\t')
             arquivo.write('\n\n')
 
