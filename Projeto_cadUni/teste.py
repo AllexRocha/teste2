@@ -1,13 +1,9 @@
 import pyodbc
+import datetime
 
-import pyodbc
-server = 'sql-estudo.database.windows.net'
-driver = '{ODBC Driver 17' \
-         ' for SQL Server}'
-database = 'db-estudos'
-username = 'alex.rocha@blueshift.com.br'
-Authentication='ActiveDirectoryInteractive'
-port = '1433'
-conn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';AUTHENTICATION='+Authentication+';PORT='+port+';DATABASE='+database+';UID='+username)#+';PWD='+password)
-conexao = pyodbc.connect(conn)
-print(conexao)
+d1 = '05/09/1993'
+data_nasc = datetime.datetime.strptime(d1, "%d/%m/%Y")
+data_atual = datetime.datetime.now()
+
+anos = abs((data_atual - data_nasc).days)/365
+print(anos)

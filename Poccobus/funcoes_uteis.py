@@ -42,7 +42,7 @@ def escrever_txt(vendidos, assentos):
                       "\t▓: Assentos disponíveis para compra\n"
                       "\tX: Assentos indisponíveis para compra\n\n")
 
-        arquivo.write('\t\t' + '\t'.join(assentos.columns) +'\n')
+        arquivo.write('\t\t' + '\t'.join(assentos.columns) + '\n')
 
         for i in range(0, assentos.shape[0]):
             arquivo.write('\t' + str(i) + '\t')
@@ -54,7 +54,7 @@ def escrever_txt(vendidos, assentos):
 # Essa função serve para renderizar a imagem que representa os acentos do ônibus
 def renderizar_imagem(assentos):
     strings = ''
-    strings += '\t\t' + '\t'.join(assentos.columns) +'\n'
+    strings += '\t\t' + '\t'.join(assentos.columns) + '\n'
 
     for i in range(0, assentos.shape[0]):
         strings += '\t' + str(i) + '\t'
@@ -66,7 +66,8 @@ def renderizar_imagem(assentos):
                 icone = '\033[37m▒\033[m'
             elif icone == '░':
                 icone = '\033[33m▒\033[m'
-            elif icone == '▓':                icone = '\033[32m▓\033[m'
+            elif icone == '▓':
+                icone = '\033[32m▓\033[m'
             elif icone == 'X':
                 icone = '\033[31mX\033[m'
             strings += icone + '\t'
@@ -81,6 +82,7 @@ def renderizar_imagem(assentos):
 
     print(strings)
 
+
 # cria e configura o layput/matriz dos assentos do ônibus conforme o usuário desejar
 def criar_matriz():
     num_linhas = int(input("Indique a quantidade de linhas: "))
@@ -90,8 +92,8 @@ def criar_matriz():
 
     corredores = []
     for i in range(num_corredores):
-        corredores.append(int(input(f"Indique o número da {i + 1}ª coluna do corredor vago de 0 a {num_colunas-1}: ")))
-
+        corredores.append(
+            int(input(f"Indique o número da {i + 1}ª coluna do corredor vago de 0 a {num_colunas - 1}: ")))
 
     matriz = []
     for i in range(num_linhas):
@@ -109,22 +111,19 @@ def criar_matriz():
                     linha.append('▓')
         matriz.append(linha)
 
-    assentos = pd.DataFrame(matriz, columns = criar_colunas(num_colunas))
+    assentos = pd.DataFrame(matriz, columns=criar_colunas(num_colunas))
 
     return assentos
 
+
 def criar_colunas(num_colunas):
     colunas = []
-    for i in range(ord('A') , ord('A') + num_colunas):
+    for i in range(ord('A'), ord('A') + num_colunas):
         colunas.append(chr(i))
-    return  colunas
-
-def cancelar_compra():
-    pass
+    return colunas
 
 
 def comprar(assentos, vendidos):
-
     # Selecionando o acento no ônibus. Neste momento o programa entra em um loop para que os assentos sejam selecionados
 
     while True:
@@ -207,11 +206,13 @@ def comprar(assentos, vendidos):
                 continue
             else:
                 break
-    if len(vendidos) > 0 :
+    if len(vendidos) > 0:
         vendidos = pd.DataFrame(vendidos).transpose()
         vendidos.to_csv('vendidos.csv', index=False)
         assentos.to_csv('database.csv', index=False)
     print('parou aqui')
+
+
 def ler_dados():
     # Carregamento inicial do programa
 
@@ -235,12 +236,46 @@ def ler_dados():
         # criar csv
         assentos.to_csv('database.csv')
 
-
     return [assentos, vendidos]
+
 
 def excluir_arquivo(file):
     if (os.path.exists(file) and os.path.isfile(file)):
         os.remove(file)
+
+
+def cancelar_compra(assentos):
+    print('##################### CANCELAR COMPRAS #######################\n')
+    renderizar_imagem(assentos)
+    try:
+        coord = input("\nindique a coordenada do assento desejado ou digite sair para finalizar: ").upper()
+
+        coord_x = coord[0]
+        coord_y = coord[1]
+        if coord[1].isdigit():
+            coord_y = int(coord[1])
+        else:
+            print('Coordenada do eixo horizontal inválida')
+
+        if coord == 'SAIR':
+            pass
+
+        else:
+            if len(coord) == 2:
+
+                if assentos.at[coord_y, coord_x] == 'X':
+                    assentos.at[coord_y, coord_x] = '▓'
+                    assentos.to_csv('database.csv', index=False)
+                    input('Compra cancelada. Aperte Enter para continuar...')
+                else:
+                    input('A coordenada informada não é de um assento comprado. Aperte Enter para continuar...')
+            else:
+                input('A coordenada informada não é válida. Aperte Enter para continuar...')
+
+    except (IndexError, ValueError) as e:
+
+        print(f"Erro ao cancelar a compra: {e}")
+        input("Aperte qualquer tecla para continuar ...")
 
 
 def finalizar(assentos, vendidos):
