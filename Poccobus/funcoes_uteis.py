@@ -181,32 +181,38 @@ def comprar(assentos, vendidos):
 
         print('##################### COMPRAR ASSENTOS #######################\n')
         renderizar_imagem(assentos)
-        try:
-            coord = input("\nindique a coordenada do assento desejado ou digite sair para finalizar: ").upper()
 
-            if coord == 'SAIR':
-                break
+        coord = input("\nindique a coordenada do assento desejado ou digite sair para finalizar: ").upper()
 
-            coord_x = coord[0]
+        if coord == 'SAIR':
+            break
+
+        coord_x = coord[0]
+        coord_y = coord[1]
+        if coord[1].isdigit():
             coord_y = int(coord[1])
+        else:
+            print('Coordenada do eixo horizontal inválida')
+            input("Aperte qualquer tecla para continuar ...")
+            continue
+        if not coord_x.isalpha():
+            print('Coordenada do eixo vertical inválida')
+            input("Aperte qualquer tecla para continuar ...")
+            continue
+        if coord == 'SAIR':
+            break
 
-            if coord_x == 'C' or ord(coord_x) > (ord('A') + assentos.shape[1]):
+        if len(coord) == 2:
+            if coord_x == 'C' or (ord(coord_x) > (ord('A') + assentos.shape[1] -1)):
                 print(f"A coluna {coord_x} não é válida")
                 input("Aperte qualquer tecla para continuar ...")
                 continue
 
-            if coord_y == 0 or coord_y > assentos.shape[0]:
+            if coord_y == 0 or coord_y > assentos.shape[0] -1:
                 print(f"A fileira {coord_y} não é válida")
                 input("Aperte qualquer tecla para continuar ...")
                 continue
 
-        except (IndexError, ValueError) as erro:
-
-            print("coordenada ou opção inválida")
-            input("Aperte qualquer tecla para continuar ...")
-            continue
-
-        else:
             if assentos.at[coord_y, coord_x] == 'X':
                 print(f"Infelizmente, o assento {coord} não está disponível\n ")
                 while True:
@@ -257,6 +263,12 @@ def comprar(assentos, vendidos):
                 continue
             else:
                 break
+
+        else:
+            print("coordenada ou opção inválida")
+            input("Aperte qualquer tecla para continuar ...")
+            continue
+
     if len(vendidos) > 0:
         vendidos = pd.DataFrame(vendidos).transpose()
         vendidos.to_csv('vendidos.csv', index=False)

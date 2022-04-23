@@ -17,17 +17,23 @@ while True:
           '\t(3) - Resetar o sistema\n'
           '\t(4) - Finalizar')
 
-    opcao = int(input())
+    opcao = input()
 
-    if opcao == 1:
-        dados = ler_dados()
-        dados_vendidos = comprar(dados[0], dados[1])
-    elif opcao == 2:
-        dados = ler_dados()
-        cancelar_compra(dados[0], dados[1], dados[2])
-    elif opcao == 3:
-        resetar()
-    elif opcao == 4:
-        dados = ler_dados()
-        finalizar(dados[0], dados[1], dados[2])
-        break
+    if opcao.isdigit():
+        opcao = int(opcao)
+
+        if opcao == 1:
+            dados = ler_dados()
+            dados_vendidos = comprar(dados[0], dados[1])
+        elif opcao == 2:
+            dados = ler_dados()
+            cancelar_compra(dados[0], dados[1], dados[2])
+        elif opcao == 3:
+            resetar()
+        elif opcao == 4:
+            dados = ler_dados()
+            finalizar(dados[0], dados[1], dados[2])
+            break
+    else:
+        print('Opção inválida')
+
