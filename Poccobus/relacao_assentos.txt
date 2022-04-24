@@ -1,0 +1,45 @@
+
+-------------------------------------------------------------------
+Data e hora: 23/04/2022 16:52
+
+Assentos disponíveis: A1, A2, A3, A4, A5, A6, A7, B1, B2, B3, B4, B5, B6, B7, D1, D2, D3, D4, D5, D6, D7, E1, E2, E3, E4, E5, E6, E7
+
+-------------------------------------------------------------------
+Data e hora: 24/04/2022 10:13
+
+Assentos vendidos: A2
+Assentos cancelados: A2
+Assentos disponíveis: A1, A2, A3, A4, A5, A6, A7, B1, B2, B3, B4, B5, B6, B7, D1, D2, D3, D4, D5, D6, D7, E1, E2, E3, E4, E5, E6, E7
+
+---------------------------------------------------------------------------------------------
+Data e hora: 24/04/2022 10:14
+
+Assentos vendidos: B1
+Assentos disponíveis: A1, A2, A3, A4, A5, A6, A7, B2, B3, B4, B5, B6, B7, D1, D2, D3, D4, D5, D6, D7, E1, E2, E3, E4, E5, E6, E7
+
+=================================================================================================
+Layout atual da posição dos assentos
+
+LEGENDA
+ 	M: Assento do motorista
+	▒: Assentos disponíveis para compra
+	▓: Assentos disponíveis para compra
+	X: Assentos indisponíveis para compra
+
+		A	B	C	D	E
+	0	M	▒	▒	▒	▒	
+
+	1	▓	X	▒	▓	▓	
+
+	2	▓	▓	▒	▓	▓	
+
+	3	▓	▓	▒	▓	▓	
+
+	4	▓	▓	▒	▓	▓	
+
+	5	▓	▓	▒	▓	▓	
+
+	6	▓	▓	▒	▓	▓	
+
+	7	▓	▓	▒	▓	▓	
+

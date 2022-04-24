@@ -10,14 +10,13 @@ except:
 while True:
 
     print('###############BEM VINDO AO SISTEMA POCCOBUS #######################\n')
-    print('Selecione uma das opções:\n\n ')
 
     print('\t(1) - Comprar um Assento\n'
           '\t(2) - Cancelar compra\n'
           '\t(3) - Resetar o sistema\n'
           '\t(4) - Finalizar')
 
-    opcao = input()
+    opcao = input('\n\nSelecione uma das opções:')
 
     if opcao.isdigit():
         opcao = int(opcao)

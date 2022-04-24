@@ -24,7 +24,7 @@ def escrever_txt(vendidos, assentos, lista_cancel):
 
     with open('relacao_assentos.txt', 'a') as arquivo:
 
-        arquivo.write('\n-------------------------------------------------------------------\n')
+        arquivo.write('\n---------------------------------------------------------------------------------------------\n')
         data = datetime.datetime.now()
         data_formatada = data.strftime('%d/%m/%Y %H:%M')
         arquivo.write(f'Data e hora: {data_formatada}\n\n')
@@ -39,7 +39,7 @@ def escrever_txt(vendidos, assentos, lista_cancel):
 
         arquivo.write('Assentos disponíveis: ' + ', '.join(assentos_disp) + '\n\n')
 
-        arquivo.write("===================================================================\n"
+        arquivo.write("=================================================================================================\n"
                       "Layout atual da posição dos assentos\n\n"
                       "LEGENDA\n "
                       "\tM: Assento do motorista\n"
