@@ -4,7 +4,7 @@ import datetime
 
 
 # Essa função serve para criar e escrever no arquivos .txt
-def escrever_txt(vendidos, assentos):
+def escrever_txt(vendidos, assentos, lista_cancel):
     assentos_disp = []
     string = ''
     for i in range(ord('A'), ord('A') + assentos.shape[1]):
@@ -12,16 +12,15 @@ def escrever_txt(vendidos, assentos):
             if assentos.at[j, chr(i)] == '▓':
                 assentos_disp.append(chr(i) + str(j))
     try:
-        with open('relacao_assentos.txt', 'r') as arquivo:
+            arquivo = open('relacao_assentos.txt')
             string = arquivo.read()
             if string:
                 posicao = string.find('=')
                 string = string[0:posicao - 1]
                 with open('relacao_assentos.txt', 'w') as arquivo:
                     arquivo.write(string)
-
     except FileNotFoundError as e:
-        print(f'({e}) gerando novo arquivo txt ...')
+        print(f'{e}:gerando novo arquivo txt ...')
 
     with open('relacao_assentos.txt', 'a') as arquivo:
 
@@ -29,13 +28,19 @@ def escrever_txt(vendidos, assentos):
         data = datetime.datetime.now()
         data_formatada = data.strftime('%d/%m/%Y %H:%M')
         arquivo.write(f'Data e hora: {data_formatada}\n\n')
-        arquivo.write('Assentos vendidos: ')
 
-        arquivo.write(', '.join(vendidos) + '\n')
+        if len(vendidos) > 0:
+            arquivo.write('Assentos vendidos: ')
+            arquivo.write(', '.join(vendidos) + '\n')
+
+        if len(lista_cancel) > 0:
+            arquivo.write('Assentos cancelados: ')
+            arquivo.write(', '.join(lista_cancel) + '\n')
+
         arquivo.write('Assentos disponíveis: ' + ', '.join(assentos_disp) + '\n\n')
 
         arquivo.write("===================================================================\n"
-                      "Layout da posição dos assentos\n\n"
+                      "Layout atual da posição dos assentos\n\n"
                       "LEGENDA\n "
                       "\tM: Assento do motorista\n"
                       "\t▒: Assentos disponíveis para compra\n"
@@ -121,6 +126,55 @@ def criar_colunas(num_colunas):
     for i in range(ord('A'), ord('A') + num_colunas):
         colunas.append(chr(i))
     return colunas
+<<<<<<< HEAD
+=======
+
+
+def cancelar_compra(assentos, vendidos, lista_cancel):
+    print('##################### CANCELAR COMPRAS #######################\n')
+    renderizar_imagem(assentos)
+    try:
+        coord = input("\nindique a coordenada do assento desejado ou digite sair para finalizar: ").upper()
+
+        coord_x = coord[0]
+        coord_y = coord[1]
+        if coord[1].isdigit():
+            coord_y = int(coord[1])
+        else:
+            print('Coordenada do eixo horizontal inválida')
+
+        if coord == 'SAIR':
+            pass
+
+        else:
+            if len(coord) == 2:
+
+                if assentos.at[coord_y, coord_x] == 'X':
+                    assentos.at[coord_y, coord_x] = '▓'
+                    input('Compra cancelada. Aperte Enter para continuar...')
+                    ler_dados()
+                    assentos.to_csv('database.csv', index=False)
+                    try:
+                        vendidos.remove(coord)
+                    except:
+                        pass
+
+                    lista_cancel.append(coord)
+                    lista_cancel = pd.DataFrame(lista_cancel).transpose()
+                    lista_cancel.to_csv('lista_cancel.csv', index=False)
+                    if len(vendidos) > 0:
+                        vendidos = pd.DataFrame(vendidos).transpose()
+                        vendidos.to_csv('vendidos.csv', index=False)
+                else:
+                    input('A coordenada informada não é de um assento comprado. Aperte Enter para continuar...')
+            else:
+                input('A coordenada informada não é válida. Aperte Enter para continuar...')
+
+    except (IndexError, ValueError) as e:
+
+        print(f"Erro ao cancelar a compra: {e}")
+        input("Aperte qualquer tecla para continuar ...")
+>>>>>>> origin/master
 
 
 def comprar(assentos, vendidos):
@@ -130,32 +184,38 @@ def comprar(assentos, vendidos):
 
         print('##################### COMPRAR ASSENTOS #######################\n')
         renderizar_imagem(assentos)
-        try:
-            coord = input("\nindique a coordenada do assento desejado ou digite sair para finalizar: ").upper()
 
-            if coord == 'SAIR':
-                break
+        coord = input("\nindique a coordenada do assento desejado ou digite sair para finalizar: ").upper()
 
-            coord_x = coord[0]
+        if coord == 'SAIR':
+            break
+
+        coord_x = coord[0]
+        coord_y = coord[1]
+        if coord[1].isdigit():
             coord_y = int(coord[1])
+        else:
+            print('Coordenada do eixo horizontal inválida')
+            input("Aperte qualquer tecla para continuar ...")
+            continue
+        if not coord_x.isalpha():
+            print('Coordenada do eixo vertical inválida')
+            input("Aperte qualquer tecla para continuar ...")
+            continue
+        if coord == 'SAIR':
+            break
 
-            if coord_x == 'C' or ord(coord_x) > (ord('A') + assentos.shape[1]):
+        if len(coord) == 2:
+            if coord_x == 'C' or (ord(coord_x) > (ord('A') + assentos.shape[1] -1)):
                 print(f"A coluna {coord_x} não é válida")
                 input("Aperte qualquer tecla para continuar ...")
                 continue
 
-            if coord_y == 0 or coord_y > assentos.shape[0]:
+            if coord_y == 0 or coord_y > assentos.shape[0] -1:
                 print(f"A fileira {coord_y} não é válida")
                 input("Aperte qualquer tecla para continuar ...")
                 continue
 
-        except (IndexError, ValueError) as erro:
-
-            print("coordenada ou opção inválida")
-            input("Aperte qualquer tecla para continuar ...")
-            continue
-
-        else:
             if assentos.at[coord_y, coord_x] == 'X':
                 print(f"Infelizmente, o assento {coord} não está disponível\n ")
                 while True:
@@ -206,37 +266,71 @@ def comprar(assentos, vendidos):
                 continue
             else:
                 break
+<<<<<<< HEAD
+=======
+
+        else:
+            print("coordenada ou opção inválida")
+            input("Aperte qualquer tecla para continuar ...")
+            continue
+
+>>>>>>> origin/master
     if len(vendidos) > 0:
         vendidos = pd.DataFrame(vendidos).transpose()
         vendidos.to_csv('vendidos.csv', index=False)
         assentos.to_csv('database.csv', index=False)
+<<<<<<< HEAD
     print('parou aqui')
+=======
+>>>>>>> origin/master
 
 
 def ler_dados():
     # Carregamento inicial do programa
 
     try:
-        vendidos = pd.read_csv('vendidos.csv', index_col=False)
-        vendidos = vendidos.values.tolist()[0]
+        lista_cancel = pd.read_csv('lista_cancel.csv', index_col=False)
+        if len(lista_cancel):
+            lista_cancel = lista_cancel.values.tolist()[0]
+        else:
+            lista_cancel = lista_cancel.values.tolist()
 
-    except FileNotFoundError as e:
+    except:
+        lista_cancel = pd.DataFrame([])
+        lista_cancel.to_csv('lista_cancel.csv', index=False)
+        lista_cancel = lista_cancel.values.tolist()
+
+    try:
+        vendidos = pd.read_csv('vendidos.csv', index_col=False)
+        if len(vendidos):
+            vendidos = vendidos.values.tolist()[0]
+        else:
+            vendidos = vendidos.values.tolist()
+
+
+
+    except:
         vendidos = pd.DataFrame([])
         vendidos.to_csv('vendidos.csv', index=False)
         vendidos = vendidos.values.tolist()
 
     try:
-        assentos = pd.read_csv('database.csv')
+        assentos = pd.read_csv('database.csv', index_col=False)
 
 
-    except FileNotFoundError as erro:
+    except:
 
         print('Arquivo não encontrado. Criando e configurando novo layout ...')
         assentos = criar_matriz()
         # criar csv
-        assentos.to_csv('database.csv')
+        assentos.to_csv('database.csv',  index=False)
 
+<<<<<<< HEAD
     return [assentos, vendidos]
+=======
+    return [assentos, vendidos, lista_cancel]
+
+>>>>>>> origin/master
 
 
 def excluir_arquivo(file):
@@ -244,6 +338,7 @@ def excluir_arquivo(file):
         os.remove(file)
 
 
+<<<<<<< HEAD
 def cancelar_compra(assentos):
     print('##################### CANCELAR COMPRAS #######################\n')
     renderizar_imagem(assentos)
@@ -279,9 +374,31 @@ def cancelar_compra(assentos):
 
 
 def finalizar(assentos, vendidos):
+=======
+def finalizar(assentos, vendidos, lista_cancel):
+>>>>>>> origin/master
     try:
-        escrever_txt(vendidos, assentos)
+        escrever_txt(vendidos, assentos, lista_cancel)
         print("Programa Finalizado. Dados registrados")
         excluir_arquivo('vendidos.csv')
+        excluir_arquivo('lista_cancel.csv')
     except:
         print("O programa finalizou mas os dados não foram registrados")
+
+
+def resetar():
+    opcao = input("Tem certeza que deseja resetar os dados S(sim)/N(não)?")
+
+    if opcao.isalpha():
+        opcao = opcao.upper()
+        if opcao == 'S':
+            assentos = criar_matriz()
+            # criar csv
+            assentos.to_csv('database.csv', index = False)
+            excluir_arquivo('relacao_assentos.txt')
+            input("Sistema resetado. Pressione Enter para continuar ...")
+        elif opcao == 'N':
+            print('Reset cancelado')
+
+    else:
+        print('Opção inválida')

@@ -4,19 +4,19 @@ import pyodbc
 def conectar():
     try:
 
-        # #Conexão remota
-        # server = 'sql-estudo.database.windows.net'
-        # database = 'db-estudos'
-        # username = 'alex.rocha@blueshift.com.br'
-        # Authentication = 'ActiveDirectoryInteractive'
-        # string_conexao = 'DRIVER={ODBC Driver 17 for SQL Server};SERVER=tcp:'+server+';PORT=1433;DATABASE='+database+';UID='+username+';AUTHENTICATION='+Authentication+''
+        #Conexão remota
+        server = 'sql-estudo.database.windows.net'
+        database = 'db-estudos'
+        username = 'alex.rocha@blueshift.com.br'
+        Authentication = 'ActiveDirectoryInteractive'
+        string_conexao = 'DRIVER={ODBC Driver 17 for SQL Server};SERVER=tcp:'+server+';PORT=1433;DATABASE='+database+';UID='+username+';AUTHENTICATION='+Authentication+''
 
-        # Coneão local
-        server = "localhost"
-        database = "master"
-        username = "alex.rocha@blueshift.com.br"
-        password = "Aa@91293250"
-        string_conexao = 'Driver={ODBC Driver 17 for SQL Server};Server=' + server + ';Database=' + database + ';Trusted_Connection=yes;'
+        # # Coneão local
+        # server = "localhost"
+        # database = "master"
+        # username = "alex.rocha@blueshift.com.br"
+        # password = "Aa@91293250"
+        # string_conexao = 'Driver={ODBC Driver 17 for SQL Server};Server=' + server + ';Database=' + database + ';Trusted_Connection=yes;'
         ## string_conexao = f'Driver={driver};Server='+server+';Database='+database+';UID='+username+';PWD='+ password;
 
         conexao = pyodbc.connect(string_conexao)

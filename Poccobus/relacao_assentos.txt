@@ -1,0 +1,7 @@
+
+-------------------------------------------------------------------
+Data e hora: 22/04/2022 20:41
+
+Assentos vendidos: A2, B7, D5, E4
+Assentos disponíveis: A1, A3, A4, A5, A6, A7, B1, B2, B3, B4, B5, B6, D1, D2, D3, D4, D6, D7, E1, E2, E3, E5, E6, E7
+

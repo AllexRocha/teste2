@@ -119,13 +119,14 @@ class Usuario(Pessoa):
             else:
                 print("opção inválida")
 
-        parametros = ','.join(parametros)
+        if len(parametros):
+            parametros = ','.join(parametros)
 
-        status = update(conn, tabela, parametros, filtro)
-        if status:
-            print("Usuário atualizado com sucesso")
-        else:
-            print("Não foi possível atualizar o usuário")
+            status = update(conn, tabela, parametros, filtro)
+            if status:
+                print("Usuário atualizado com sucesso")
+            else:
+                print("Não foi possível atualizar o usuário")
 
     @staticmethod
     def listar_usuarios(conn):
@@ -214,13 +215,15 @@ class Motorista(Pessoa):
             else:
                 print("opção inválida")
 
-        parametros = ','.join(parametros)
+        if len(parametros):
 
-        status = update(tabela, conn, parametros, filtro)
-        if status:
-            print("Motorista atualizado com sucesso")
-        else:
-            print("Não foi possível atualizar o motorista")
+            parametros = ','.join(parametros)
+
+            status = update(conn, tabela, parametros, filtro)
+            if status:
+                print("Motorista atualizado com sucesso")
+            else:
+                print("Não foi possível atualizar o motorista")
 
     @staticmethod
     def listar_motoristas(conn):
@@ -294,25 +297,25 @@ class Cartao:
                 if cartao[2] == self.tipo:
                     dup_cartao = True
                     break
-        if self.tipo == 'Idoso':
-            usuario = buscar(conn, 'usuarios','','id', self.id_usuario, 1)
-            data_nasc = usuario[0][-1]
-            data_atual = datetime.now().date()
-            anos = abs((data_atual - data_nasc).days) / 365
-            if anos > idade_limite:
-                idoso_cartao = True
-
         if dup_cartao:
             print(f'o usuário já possui um cartão do tipo: {self.tipo}')
-        elif not idoso_cartao:
-            print(f'o usuário não possui os requisitos para possuir cartão do tipo Idoso')
         else:
-            retorno = inserir(conn, tabela, colunas, valores, parametros)
+            if self.tipo == 'Idoso':
+                usuario = buscar(conn, 'usuarios','','id', self.id_usuario, 1)
+                data_nasc = usuario[0][-1]
+                data_atual = datetime.now().date()
+                anos = abs((data_atual - data_nasc).days) / 365
+                if anos > idade_limite:
+                    idoso_cartao = True
+                else:
+                    print(f'o usuário não possui os requisitos para possuir cartão do tipo Idoso')
+            if self.tipo != 'Idoso' or idoso_cartao:
+                retorno = inserir(conn, tabela, colunas, valores, parametros)
 
-            if retorno:
-                print(f"O cartão foi cadastrado com sucesso ")
-            else:
-                print("Erro ao cadastrar cartão")
+                if retorno:
+                    print(f"O cartão foi cadastrado com sucesso ")
+                else:
+                    print("Erro ao cadastrar cartão")
 
     def atualizar(self, conn, tabela, id):
 
@@ -335,7 +338,32 @@ class Cartao:
                     parametros.insert(0, f"qtd_creditos_disponivel='{self.qtd_creditos}'")
 
             elif opcao == 2:
-                self.tipo = input("Digite o novo tipo do cartão: ")
+
+                print('\n\t(1) - Comum\n'
+                      '\t(2) - Estudante\n'
+                      '\t(3) - Vale-Transporte\n'
+                      '\t(4) - Idoso\n')
+                opcao = input("Selecione o tipo do cartão: ")
+
+                if opcao.isdigit():
+                    opcao = int(opcao)
+
+                if opcao == 1:
+                    self.tipo = 'Comum'
+
+                elif opcao == 2:
+                    self.tipo = 'Estudante'
+
+                elif opcao == 3:
+                    self.tipo = 'Vale-Tranporte'
+
+                elif opcao == 4:
+                    self.tipo = 'Idoso'
+
+                else:
+                    print('Opção inválida')
+                    pass
+
                 if not ('tipo=?' in parametros):
                     parametros.insert(1, f"tipo='{self.tipo}'")
 
@@ -355,13 +383,14 @@ class Cartao:
             else:
                 print("opção inválida")
 
-        parametros = ','.join(parametros)
+        if len(parametros):
+            parametros = ','.join(parametros)
 
-        status = update(tabela, conn, parametros, filtro)
-        if status:
-            print("Cartão atualizado com sucesso")
-        else:
-            print("Não foi possível atualizar o cartão")
+            status = update(conn, tabela, parametros, filtro)
+            if status:
+                print("Cartão atualizado com sucesso")
+            else:
+                print("Não foi possível atualizar o cartão")
 
     @staticmethod
     def listar_cartoes(conn):
@@ -478,7 +507,7 @@ class Onibus:
 
             elif opcao == 4:
                 ano = input("Informe o novo ano de fabricação no formato yyyy: ")
-                self.ano_fabricacao = datetime.strptime(ano, "%d/%m/%Y").date()
+                self.ano_fabricacao = datetime.strptime('1/1/' + ano, "%d/%m/%Y").date()
                 if not ('ano_de_fabricacao=?' in parametros):
                     parametros.insert(4, f"ano_de_fabricacao='{self.ano_fabricacao}'")
 
@@ -493,13 +522,14 @@ class Onibus:
             else:
                 print("opção inválida")
 
-        parametros = ','.join(parametros)
+        if len(parametros):
+            parametros = ','.join(parametros)
 
-        status = update(tabela, conn, parametros, filtro)
-        if status:
-            print("Ônibus atualizado com sucesso")
-        else:
-            print("Não foi possível atualizar o ônibus")
+            status = update(conn, tabela, parametros, filtro)
+            if status:
+                print("Ônibus atualizado com sucesso")
+            else:
+                print("Não foi possível atualizar o ônibus")
 
     @staticmethod
     def listar_onibus(conn):

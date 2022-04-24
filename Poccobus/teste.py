@@ -1,11 +1,14 @@
 import pandas as pd
 import os
 
+vendidos = ['a','b','c']
+vendidos.remove('a')
+print(vendidos)
 
-with open('texto.txt', 'r+') as arquivo:
-    texto = arquivo.read()
-    arquivo.write('\nafdafsggfdbgdb')
-    print(texto)
+# with open('texto.txt', 'r+') as arquivo:
+#     texto = arquivo.read()
+#     arquivo.write('\nafdafsggfdbgdb')
+#     print(texto)
 
 # with open('texto.txt', 'a') as arquivo:
 #     arquivo.write('asdsdfdddfdsf')
