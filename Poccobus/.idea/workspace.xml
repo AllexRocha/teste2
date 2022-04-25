@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a12463b5-dc21-40af-9bec-d23a79c821d7" name="Changes" comment="teste de entradas inválidas funcionando">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Poccobus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Poccobus.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Projeto_cadUni.sql" beforeDir="false" />
-    </list>
+    <list default="true" id="a12463b5-dc21-40af-9bec-d23a79c821d7" name="Changes" comment="teste de entradas inválidas funcionando" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
