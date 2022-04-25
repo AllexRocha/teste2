@@ -10,13 +10,14 @@ def conectar():
         database = 'db-estudos'
         username = 'alex.rocha@blueshift.com.br'
         Authentication = 'ActiveDirectoryIntegrated'
-        string_conexao = F'DRIVER={ODBC Driver 17 for SQL Server};SERVER=tcp'+server+';PORT=1433;DATABASE='+database+';UID='+username+';AUTHENTICATION='+Authentication+''
+        driver = '/opt/microsoft/msodbcsql17/lib64/libmsodbcsql-17.9.so.1.1'   # tive que usar o caminho do driver no meu computador aqui
+        string_conexao = F'DRIVER={driver};SERVER=tcp'+server+';PORT=1433;DATABASE='+database+';UID='+username+';AUTHENTICATION='+Authentication+''
 
         # server = "sql-estudo.database.windows.net,1433"
         # database = "db-estudos"
         # username = "alex.rocha@blueshift.com.br"
         password = "Aa@91293250"
-        # driver = '/opt/microsoft/msodbcsql17/lib64/libmsodbcsql-17.9.so.1.1'   # tive que usar o caminho do driver no meu computador aqui
+        driver = '/opt/microsoft/msodbcsql17/lib64/libmsodbcsql-17.9.so.1.1'   # tive que usar o caminho do driver no meu computador aqui
         # string_conexao = f'Driver={driver};Server='+server+';Database='+database+';UID='+username+';PWD='+ password;
         #string_conexao = f'Driver={driver};Server=' + server + ';Database=' + database + ';Trusted_Connection=yes;'
 
