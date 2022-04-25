@@ -86,28 +86,28 @@ while True:
             continue
 
         if opcao == 1:
-            print('\n################ * Listando Usuários * ##############\n')
+            print('\n################################## * Listando Usuários * #################################\n')
             listar(conn, 'usuarios')
             input("Pressione Enter para continuar ...")
         elif opcao == 2:
-            print('\n################ * Listando Motoristas * ##############\n')
+            print('\n################################## * Listando Motoristas * ##################################\n')
             listar(conn, 'motoristas')
             input("\nPressione Enter para continuar ...")
         elif opcao == 3:
-            print('\n################ * Listando Cartões * ##############\n')
+            print('\n################################## * Listando Cartões * ##################################\n')
             listar(conn, 'cartoes')
             input("\nPressione Enter para continuar ...")
         elif opcao == 4:
-            print('\n########################## * Listando Ônibus * ########################\n')
+            print('\n################################## * Listando Ônibus * ##################################\n')
             listar(conn, 'onibus')
             input("\nPressione Enter para continuar ...")
 
         elif opcao == 5:
-            print('\n########################## * Listando Usuários e cartões * ########################\n')
+            print('\n################################## * Listando Usuários e cartões * ##################################\n')
             listar_especial(conn, 1)
             input("\nPressione Enter para continuar ...")
         elif opcao == 6:
-            print('\n########################## * Listando Motoristas e ônibus * ########################\n')
+            print('\n################################## * Listando Motoristas e ônibus * ##################################\n')
             listar_especial(conn, 2)
             input("\nPressione Enter para continuar ...")
 
@@ -121,7 +121,7 @@ while True:
               '\t(2) - Atualizar Motorista\n'
               '\t(3) - Atualizar Cartão\n'
               '\t(4) - Atualizar Ônibus\n'
-              '\t(3) - Retornar\n')
+              '\t(5) - Retornar\n')
 
         opcao = input('\n\tIndique a opção desejada: ')
 
@@ -159,7 +159,7 @@ while True:
               '\t(2) - Deletar Motorista\n'
               '\t(3) - Deletar Cartão\n'
               '\t(4) - Deletar Ônibus\n'
-              '\t(3) - Retornar\n')
+              '\t(5) - Retornar\n')
 
         opcao = input('\n\tIndique a opção desejada: ')
 
@@ -172,7 +172,7 @@ while True:
             continue
 
         if opcao == 1:
-            print('\n################ * Deletando Usuário * ##############\n')
+            print('\n################################### * Deletando Usuário * ##############################\n')
             deletar(conn, 'usuarios')
             input("Pressione Enter para continuar ...")
         elif opcao == 2:

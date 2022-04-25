@@ -216,7 +216,7 @@ class Motorista(Pessoa):
 
         parametros = ','.join(parametros)
 
-        status = update(tabela, conn, parametros, filtro)
+        status = update(conn, tabela, parametros, filtro)
         if status:
             print("Motorista atualizado com sucesso")
         else:
@@ -294,25 +294,26 @@ class Cartao:
                 if cartao[2] == self.tipo:
                     dup_cartao = True
                     break
-        if self.tipo == 'Idoso':
-            usuario = buscar(conn, 'usuarios','','id', self.id_usuario, 1)
-            data_nasc = usuario[0][-1]
-            data_atual = datetime.now().date()
-            anos = abs((data_atual - data_nasc).days) / 365
-            if anos > idade_limite:
-                idoso_cartao = True
 
         if dup_cartao:
             print(f'o usuário já possui um cartão do tipo: {self.tipo}')
-        elif not idoso_cartao:
-            print(f'o usuário não possui os requisitos para possuir cartão do tipo Idoso')
         else:
-            retorno = inserir(conn, tabela, colunas, valores, parametros)
+            if self.tipo == 'Idoso':
+                usuario = buscar(conn, 'usuarios','','id', self.id_usuario, 1)
+                data_nasc = usuario[0][-1]
+                data_atual = datetime.now().date()
+                anos = abs((data_atual - data_nasc).days) / 365
+                if anos > idade_limite:
+                    idoso_cartao = True
+                if not idoso_cartao:
+                    print(f'o usuário não possui os requisitos para possuir cartão do tipo Idoso')
+            if self.tipo != 'Idoso' or idoso_cartao:
+                retorno = inserir(conn, tabela, colunas, valores, parametros)
 
-            if retorno:
-                print(f"O cartão foi cadastrado com sucesso ")
-            else:
-                print("Erro ao cadastrar cartão")
+                if retorno:
+                    print(f"O cartão foi cadastrado com sucesso ")
+                else:
+                    print("Erro ao cadastrar cartão")
 
     def atualizar(self, conn, tabela, id):
 
@@ -357,7 +358,7 @@ class Cartao:
 
         parametros = ','.join(parametros)
 
-        status = update(tabela, conn, parametros, filtro)
+        status = update(conn, tabela, parametros, filtro)
         if status:
             print("Cartão atualizado com sucesso")
         else:
@@ -478,7 +479,7 @@ class Onibus:
 
             elif opcao == 4:
                 ano = input("Informe o novo ano de fabricação no formato yyyy: ")
-                self.ano_fabricacao = datetime.strptime(ano, "%d/%m/%Y").date()
+                self.ano_fabricacao = datetime.strptime('01/01/' + ano, "%d/%m/%Y").date()
                 if not ('ano_de_fabricacao=?' in parametros):
                     parametros.insert(4, f"ano_de_fabricacao='{self.ano_fabricacao}'")
 
@@ -495,7 +496,7 @@ class Onibus:
 
         parametros = ','.join(parametros)
 
-        status = update(tabela, conn, parametros, filtro)
+        status = update(conn, tabela, parametros, filtro)
         if status:
             print("Ônibus atualizado com sucesso")
         else:

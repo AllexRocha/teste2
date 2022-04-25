@@ -49,19 +49,18 @@ def cadastrar_onibus(conn):
     data = input("Informe o ano de fabricação do ônibus: ")
     ano_de_fabricacao = formatar_data('01/01/' + data, 0)
     Motorista.listar_motoristas(conn)
-    num_cnh = int(input("\nInforme o número da cnh do motorista do ônibus: "))
-    id_motorista = buscar(conn, 'motoristas', '', 'numero_cnh', num_cnh, 1)
+    id = int(input("\nInforme o número o id do motorista do ônibus: "))
+    id_motorista = buscar(conn, 'motoristas', '', 'id', id, 1)
 
     if id_motorista:
         onibus = Onibus(numero_placa, numero_linha, modelo_do_onibus, ano_de_fabricacao, id_motorista[0][0])
         onibus.inserir_onibus(conn)
     else:
-        print(f"O motorista com o númedo da cnh:{num_cnh} não foi encontrado")
+        print(f"O motorista com o id:{id} não foi encontrado")
 
 
 def cadastrar_cartao(conn):
     global id_usuario
-    cartao_existe = False
     qtd_creditos = float(input("Insira a quantidade de créditos disponível: "))
     while True:
         print('\n\t(1) - Comum\n'
@@ -114,7 +113,7 @@ def atualizar(conn, tabela):
 
     id = input("\n\nInforme o ID do dado a ser atualizado: ")
 
-    if id.isdigit() and len(id) == 1:
+    if id.isdigit():
         id = int(id)
 
         dado = buscar(conn, tabela, '', 'id', id, 1)
@@ -146,7 +145,7 @@ def deletar(conn, tabela):
 
     id = input("\n\nInforme o ID do dado a ser deletado: ")
 
-    if id.isdigit() and len(id) == 1:
+    if id.isdigit():
         id = int(id)
 
         if buscar(conn, tabela, '', 'id', id, 1):
@@ -159,7 +158,9 @@ def deletar(conn, tabela):
                         if tabela == 'usuarios':
                             dados = buscar(conn, 'cartoes', '', 'id_usuario', id, 1)
                             if dados:
-                                delete(conn, 'cartoes', dados[0][0])
+                                for dado in dados:
+                                    if dado:
+                                        delete(conn, 'cartoes', dado[0])
                             if delete(conn, tabela, id):
                                 print('Dados deletados')
                             else:

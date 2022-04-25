@@ -1,9 +1,11 @@
 import pyodbc
 import datetime
+parametros = ['','','','','','']
+sobrenome = 'testetse'
+n =parametros[2].find('sobrenome=')
+while True:
+    if not (parametros.find('sobrenome=') +1):
+        # del(parametros[2])
+        parametros.insert(1, f"sobrenome='{sobrenome}'")
 
-d1 = '05/09/1993'
-data_nasc = datetime.datetime.strptime(d1, "%d/%m/%Y")
-data_atual = datetime.datetime.now()
 
-anos = abs((data_atual - data_nasc).days)/365
-print(anos)
