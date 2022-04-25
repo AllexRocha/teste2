@@ -1,22 +1,10 @@
 
--------------------------------------------------------------------
-<<<<<<< HEAD
-Data e hora: 23/04/2022 16:52
-
-Assentos disponíveis: A1, A2, A3, A4, A5, A6, A7, B1, B2, B3, B4, B5, B6, B7, D1, D2, D3, D4, D5, D6, D7, E1, E2, E3, E4, E5, E6, E7
-
--------------------------------------------------------------------
-Data e hora: 24/04/2022 10:13
-
-Assentos vendidos: A2
-Assentos cancelados: A2
-Assentos disponíveis: A1, A2, A3, A4, A5, A6, A7, B1, B2, B3, B4, B5, B6, B7, D1, D2, D3, D4, D5, D6, D7, E1, E2, E3, E4, E5, E6, E7
-
 ---------------------------------------------------------------------------------------------
-Data e hora: 24/04/2022 10:14
+Data e hora: 24/04/2022 21:28
 
-Assentos vendidos: B1
-Assentos disponíveis: A1, A2, A3, A4, A5, A6, A7, B2, B3, B4, B5, B6, B7, D1, D2, D3, D4, D5, D6, D7, E1, E2, E3, E4, E5, E6, E7
+Assentos vendidos: D2
+Assentos cancelados: D2
+Assentos disponíveis: A1, A2, A3, A4, B1, B2, B3, B4, D1, D2, D3, D4, E1, E2, E3, E4
 
 =================================================================================================
 Layout atual da posição dos assentos
@@ -30,23 +18,11 @@ LEGENDA
 		A	B	C	D	E
 	0	M	▒	▒	▒	▒	
 
-	1	▓	X	▒	▓	▓	
+	1	▓	▓	▒	▓	▓	
 
 	2	▓	▓	▒	▓	▓	
 
 	3	▓	▓	▒	▓	▓	
 
 	4	▓	▓	▒	▓	▓	
-
-	5	▓	▓	▒	▓	▓	
-
-	6	▓	▓	▒	▓	▓	
-
-	7	▓	▓	▒	▓	▓	
-=======
-Data e hora: 22/04/2022 20:41
-
-Assentos vendidos: A2, B7, D5, E4
-Assentos dispon�veis: A1, A3, A4, A5, A6, A7, B1, B2, B3, B4, B5, B6, D1, D2, D3, D4, D6, D7, E1, E2, E3, E5, E6, E7
->>>>>>> ceb1a8ed435b13d387ac2046bf8f2fa82ab2a09b
 
