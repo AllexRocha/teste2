@@ -19,7 +19,7 @@
 # Vamos falar mais sobre o módulo json, mas:
 # json.dump = Gera um arquivo json
 # json.load
-caminho_arquivo = 'aula116.txt'
+caminho_arquivo = 'secao_4/aula116.txt'
 with open(caminho_arquivo, 'w', encoding='utf-8') as arquivo:
     arquivo.write('Atençãão \n')
     arquivo.write('Linha 1 \n')
